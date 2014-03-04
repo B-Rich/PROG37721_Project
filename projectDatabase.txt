@@ -1,0 +1,17 @@
+name		varchar(32)
+
+platform	varchar(16)
+
+publisher	varchar(32)
+
+developer	varchar(32)
+
+category	varchar(16)
+
+cost		float
+
+availability	int
+
+release-date	date
+
+rating		varchar(2)
