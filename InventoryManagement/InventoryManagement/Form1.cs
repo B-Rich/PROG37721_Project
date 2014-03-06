@@ -13,6 +13,16 @@ namespace InventoryManagement
 {
 	public partial class Form1 : Form
 	{
+		private static readonly int COL_NAME = 0;
+		private static readonly int COL_PLATFORM = 1;
+		private static readonly int COL_PUBLISHER = 2;
+		private static readonly int COL_DEVELOPER = 3;
+		private static readonly int COL_CATEGORY = 4;
+		private static readonly int COL_COST = 5;
+		private static readonly int COL_AVAILABILITY = 6;
+		private static readonly int COL_RELEASEDATE = 7;
+		private static readonly int COL_RATING = 8;
+
         private SqlConnection conn=null;
         //private SqlCommand cmd=null; //CJ: Not needed?
 		private SqlDataAdapter dAdapter = null;
@@ -24,7 +34,16 @@ namespace InventoryManagement
 		}
 
         private void Form1_Load(object sender,EventArgs e) {
+			
+			//CJ: Clear test values from controls
+			cboCategory.Items.Clear();
+			cboDeveloper.Items.Clear();
+			cboPlatform.Items.Clear();
+			cboPublisher.Items.Clear();
+			cboRating.Items.Clear();
+			
 			updateFromDB();
+			populateComboBoxes();
         }
 
         private void cmdInsert_Click(object sender,EventArgs e) {
@@ -63,7 +82,7 @@ namespace InventoryManagement
 		{
 			try
 			{
-				//Do some regex replacement so it works 
+				//use helper method to get a connection obj
 				SqlConnection conn = getConnection();
 				conn.Open(); //open connection
 				String sql = "SELECT * FROM [inventory]";
@@ -77,7 +96,7 @@ namespace InventoryManagement
 				bindingSource1.DataMember = "inventory"; //specify the table
 				dg1.DataSource = bindingSource1;
 
-				dg1.Columns[2].Visible = false;
+				dg1.Columns[2].Visible = false; //hide columns we don't want to see
 				dg1.Columns[3].Visible = false;
 				dg1.Columns[4].Visible = false;
 				dg1.Columns[7].Visible = false;
@@ -100,15 +119,28 @@ namespace InventoryManagement
 			}
 		}
 
+		/**
+		 * Populate combo boxes with all distinct values from the database for the
+		 * appropriate combo boxes.
+		 */
 		private void populateComboBoxes()
 		{
 			for (int i = 0; i < mainDataSet.Tables["inventory"].Rows.Count; i++)
 			{
 				DataRow row = mainDataSet.Tables["inventory"].Rows[i];
-				//if (!cboCategory.Items.Contains(row
-				//TODO: Finish populating...
+				if (!cboCategory.Items.Contains(row.ItemArray[COL_CATEGORY])) //if not already in the list
+					cboCategory.Items.Add(row.ItemArray[COL_CATEGORY]);		  //add it to the list
+				if (!cboDeveloper.Items.Contains(row.ItemArray[COL_DEVELOPER]))
+					cboDeveloper.Items.Add(row.ItemArray[COL_DEVELOPER]);
+				if (!cboPlatform.Items.Contains(row.ItemArray[COL_PLATFORM]))
+					cboPlatform.Items.Add(row.ItemArray[COL_PLATFORM]);
+				if (!cboPublisher.Items.Contains(row.ItemArray[COL_PUBLISHER]))
+					cboPublisher.Items.Add(row.ItemArray[COL_PUBLISHER]);
+				if (!cboRating.Items.Contains(row.ItemArray[COL_RATING]))
+					cboRating.Items.Add(row.ItemArray[COL_RATING]);
 			}
 		}
+
 
 		/**
 		 * SqlConnection factory

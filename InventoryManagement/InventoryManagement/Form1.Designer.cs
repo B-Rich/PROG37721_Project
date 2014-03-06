@@ -285,6 +285,7 @@
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.txtName);
 			this.Controls.Add(this.label1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Name = "Form1";
 			this.Text = "Product Search";
 			this.Load += new System.EventHandler(this.Form1_Load);
