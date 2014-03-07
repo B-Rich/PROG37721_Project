@@ -220,15 +220,16 @@
 			this.dg1.AllowUserToResizeColumns=false;
 			this.dg1.AllowUserToResizeRows=false;
 			this.dg1.ColumnHeadersHeightSizeMode=System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dg1.Location=new System.Drawing.Point(15,64);
+			this.dg1.Location=new System.Drawing.Point(30,64);
 			this.dg1.Name="dg1";
 			this.dg1.ReadOnly=true;
-			this.dg1.Size=new System.Drawing.Size(676,324);
+			this.dg1.SelectionMode=System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dg1.Size=new System.Drawing.Size(643,324);
 			this.dg1.TabIndex=14;
 			// 
 			// cmdInsert
 			// 
-			this.cmdInsert.Location=new System.Drawing.Point(478,394);
+			this.cmdInsert.Location=new System.Drawing.Point(473,394);
 			this.cmdInsert.Name="cmdInsert";
 			this.cmdInsert.Size=new System.Drawing.Size(88,23);
 			this.cmdInsert.TabIndex=15;
@@ -238,7 +239,7 @@
 			// 
 			// cmdUpdate
 			// 
-			this.cmdUpdate.Location=new System.Drawing.Point(579,394);
+			this.cmdUpdate.Location=new System.Drawing.Point(567,394);
 			this.cmdUpdate.Name="cmdUpdate";
 			this.cmdUpdate.Size=new System.Drawing.Size(51,23);
 			this.cmdUpdate.TabIndex=16;
@@ -248,7 +249,7 @@
 			// 
 			// cmdDelete
 			// 
-			this.cmdDelete.Location=new System.Drawing.Point(643,394);
+			this.cmdDelete.Location=new System.Drawing.Point(624,394);
 			this.cmdDelete.Name="cmdDelete";
 			this.cmdDelete.Size=new System.Drawing.Size(49,23);
 			this.cmdDelete.TabIndex=17;
@@ -258,11 +259,11 @@
 			// 
 			// cmdClear
 			// 
-			this.cmdClear.Location=new System.Drawing.Point(15,394);
+			this.cmdClear.Location=new System.Drawing.Point(30,394);
 			this.cmdClear.Name="cmdClear";
 			this.cmdClear.Size=new System.Drawing.Size(118,23);
 			this.cmdClear.TabIndex=18;
-			this.cmdClear.Text="Clear Fields";
+			this.cmdClear.Text="Clear Filter";
 			this.cmdClear.UseVisualStyleBackColor=true;
 			this.cmdClear.Click+=new System.EventHandler(this.cmdClear_Click);
 			// 

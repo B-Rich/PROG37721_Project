@@ -27,6 +27,7 @@ namespace InventoryManagement
         //private SqlCommand cmd=null; //CJ: Not needed?
 		private SqlDataAdapter dAdapter = null;
 		private DataSet mainDataSet = null;
+		private DataView displayView=null;
 
 		public Form1()
 		{
@@ -34,6 +35,13 @@ namespace InventoryManagement
 		}
 
         private void Form1_Load(object sender,EventArgs e) {
+			txtName.TextChanged+=new EventHandler(updateViewFilter);
+			cboPlatform.TextChanged+=new EventHandler(updateViewFilter);
+			cboPublisher.TextChanged+=new EventHandler(updateViewFilter);
+			cboDeveloper.TextChanged+=new EventHandler(updateViewFilter);
+			cboCategory.TextChanged+=new EventHandler(updateViewFilter);
+			dtpReleaseDate.TextChanged+=new EventHandler(updateViewFilter);
+			cboRating.TextChanged+=new EventHandler(updateViewFilter);
 			
 			//CJ: Clear test values from controls
 			cboCategory.Items.Clear();
@@ -41,10 +49,52 @@ namespace InventoryManagement
 			cboPlatform.Items.Clear();
 			cboPublisher.Items.Clear();
 			cboRating.Items.Clear();
-			
+
 			updateFromDB();
 			populateComboBoxes();
         }
+		
+		private void updateViewFilter(object sender,EventArgs e) {
+			string filter="";
+			if(txtName.Text.Length>0) {
+				if(filter.Length>0)
+					filter+=" AND ";
+				filter+="name LIKE '%"+txtName.Text+"%'";
+			}
+			if(cboPlatform.Text.Length>0) {
+				if(filter.Length>0)
+					filter+=" AND ";
+				filter+="platform LIKE '%"+cboPlatform.Text+"%'";
+			}
+			if(cboPublisher.Text.Length>0) {
+				if(filter.Length>0)
+					filter+=" AND ";
+				filter+="publisher LIKE '%"+cboPublisher.Text+"%'";
+			}
+			if(cboDeveloper.Text.Length>0) {
+				if(filter.Length>0)
+					filter+=" AND ";
+				filter+="developer LIKE '%"+cboDeveloper.Text+"%'";
+			}
+			if(cboCategory.Text.Length>0) {
+				if(filter.Length>0)
+					filter+=" AND ";
+				filter+="category LIKE '%"+cboCategory.Text+"%'";
+			}
+			/*if(dtpReleaseDate.Text.Length>0) { //Fix me
+				if(filter.Length>0)
+					filter+=" AND ";
+				filter+="releaseDate = '"+dtpReleaseDate.Text+"'";
+			}*/
+			if(cboRating.Text.Length>0) {
+				if(filter.Length>0)
+					filter+=" AND ";
+				filter+="rating LIKE '%"+cboRating.Text+"%'";
+			}
+			filter=filter.Replace("[","[[]"); //Escape opening square brackets
+			
+			displayView.RowFilter=filter;			
+		}
 
         private void cmdInsert_Click(object sender,EventArgs e) {
             Hide();
@@ -91,19 +141,23 @@ namespace InventoryManagement
 				mainDataSet = new DataSet();
 				dAdapter.Fill(mainDataSet, "inventory");
 				conn.Close();
+
+				//Initialize DataView
+				displayView=new DataView(mainDataSet.Tables["inventory"]);
+				displayView.Sort="name DESC";
+
 				//bind
-				bindingSource1.DataSource = mainDataSet;
-				bindingSource1.DataMember = "inventory"; //specify the table
+				bindingSource1.DataSource=displayView;
+				//bindingSource1.DataSource = mainDataSet;
+				//bindingSource1.DataMember = "inventory"; //specify the table
 				dg1.DataSource = bindingSource1;
 
-				dg1.Columns[2].Visible = false; //hide columns we don't want to see
-				dg1.Columns[3].Visible = false;
-				dg1.Columns[4].Visible = false;
-				dg1.Columns[7].Visible = false;
-				dg1.Columns[8].Visible = false;
-
-				//FIXME: Format columns so all 4 fit in the control's space
-
+				dg1.Columns[COL_PUBLISHER].Visible = false; //hide columns we don't want to see
+				dg1.Columns[COL_DEVELOPER].Visible = false;
+				//dg1.Columns[COL_CATEGORY].Visible = false;
+				//dg1.Columns[COL_RELEASEDATE].Visible = false;
+				dg1.Columns[COL_RATING].Visible = false;
+				
 				dg1.ClearSelection();
 			}
 			catch (SqlException ex)
