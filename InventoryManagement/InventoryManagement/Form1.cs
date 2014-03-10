@@ -13,7 +13,7 @@ namespace InventoryManagement
 {
 	public partial class Form1 : Form
 	{
-		private static readonly int COL_NAME = 0;
+		private static readonly int COL_NAME = 0; //hi
 		private static readonly int COL_PLATFORM = 1;
 		private static readonly int COL_PUBLISHER = 2;
 		private static readonly int COL_DEVELOPER = 3;
