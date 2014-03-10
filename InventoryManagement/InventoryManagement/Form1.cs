@@ -40,7 +40,7 @@ namespace InventoryManagement
 			cboPublisher.TextChanged+=new EventHandler(updateViewFilter);
 			cboDeveloper.TextChanged+=new EventHandler(updateViewFilter);
 			cboCategory.TextChanged+=new EventHandler(updateViewFilter);
-			dtpReleaseDate.TextChanged+=new EventHandler(updateViewFilter);
+			//dtpReleaseDate.TextChanged+=new EventHandler(updateViewFilter);
 			cboRating.TextChanged+=new EventHandler(updateViewFilter);
 			
 			//CJ: Clear test values from controls
@@ -91,8 +91,18 @@ namespace InventoryManagement
 					filter+=" AND ";
 				filter+="rating LIKE '%"+cboRating.Text+"%'";
 			}
-			filter=filter.Replace("[","[[]"); //Escape opening square brackets
-			
+
+			StringBuilder sb = new StringBuilder();
+			for(int i=0;i<filter.Length;i++) {
+				if(filter[i]=='['||filter[i]==']'||filter[i]=='%'||filter[i]=='^') {
+					sb.Append("["+filter[i]+"]");
+				}
+				else {
+					sb.Append(filter[i]);
+				}
+			}
+			filter=sb.ToString();
+
 			displayView.RowFilter=filter;			
 		}
 
@@ -122,7 +132,7 @@ namespace InventoryManagement
             cboDeveloper.Text="";
             cboCategory.Text="";
             cboRating.Text="";
-            dtpReleaseDate.ResetText();
+            //dtpReleaseDate.ResetText();
             txtName.Focus();
             dg1.ClearSelection();
         }

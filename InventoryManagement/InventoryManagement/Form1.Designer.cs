@@ -38,7 +38,6 @@
 			this.label4=new System.Windows.Forms.Label();
 			this.cboDeveloper=new System.Windows.Forms.ComboBox();
 			this.label5=new System.Windows.Forms.Label();
-			this.dtpReleaseDate=new System.Windows.Forms.DateTimePicker();
 			this.label6=new System.Windows.Forms.Label();
 			this.cboCategory=new System.Windows.Forms.ComboBox();
 			this.label7=new System.Windows.Forms.Label();
@@ -49,6 +48,9 @@
 			this.cmdDelete=new System.Windows.Forms.Button();
 			this.cmdClear=new System.Windows.Forms.Button();
 			this.bindingSource1=new System.Windows.Forms.BindingSource(this.components);
+			this.year=new System.Windows.Forms.ComboBox();
+			this.month=new System.Windows.Forms.ComboBox();
+			this.day=new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
 			this.SuspendLayout();
@@ -154,19 +156,10 @@
 			this.label5.TabIndex=8;
 			this.label5.Text="Release Date";
 			// 
-			// dtpReleaseDate
-			// 
-			this.dtpReleaseDate.Location=new System.Drawing.Point(279,37);
-			this.dtpReleaseDate.MaxDate=new System.DateTime(2100,12,31,0,0,0,0);
-			this.dtpReleaseDate.MinDate=new System.DateTime(1970,1,1,0,0,0,0);
-			this.dtpReleaseDate.Name="dtpReleaseDate";
-			this.dtpReleaseDate.Size=new System.Drawing.Size(138,20);
-			this.dtpReleaseDate.TabIndex=9;
-			// 
 			// label6
 			// 
 			this.label6.AutoSize=true;
-			this.label6.Location=new System.Drawing.Point(423,40);
+			this.label6.Location=new System.Drawing.Point(420,40);
 			this.label6.Name="label6";
 			this.label6.Size=new System.Drawing.Size(49,13);
 			this.label6.TabIndex=10;
@@ -181,7 +174,7 @@
             "G",
             "H",
             "J"});
-			this.cboCategory.Location=new System.Drawing.Point(478,36);
+			this.cboCategory.Location=new System.Drawing.Point(473,37);
 			this.cboCategory.MaxLength=16;
 			this.cboCategory.Name="cboCategory";
 			this.cboCategory.Size=new System.Drawing.Size(121,21);
@@ -191,7 +184,7 @@
 			// label7
 			// 
 			this.label7.AutoSize=true;
-			this.label7.Location=new System.Drawing.Point(605,40);
+			this.label7.Location=new System.Drawing.Point(600,40);
 			this.label7.Name="label7";
 			this.label7.Size=new System.Drawing.Size(38,13);
 			this.label7.TabIndex=12;
@@ -267,11 +260,41 @@
 			this.cmdClear.UseVisualStyleBackColor=true;
 			this.cmdClear.Click+=new System.EventHandler(this.cmdClear_Click);
 			// 
+			// year
+			// 
+			this.year.FormattingEnabled=true;
+			this.year.Location=new System.Drawing.Point(280,37);
+			this.year.MaxLength=4;
+			this.year.Name="year";
+			this.year.Size=new System.Drawing.Size(50,21);
+			this.year.TabIndex=19;
+			// 
+			// month
+			// 
+			this.month.FormattingEnabled=true;
+			this.month.Location=new System.Drawing.Point(336,36);
+			this.month.MaxLength=2;
+			this.month.Name="month";
+			this.month.Size=new System.Drawing.Size(35,21);
+			this.month.TabIndex=20;
+			// 
+			// day
+			// 
+			this.day.FormattingEnabled=true;
+			this.day.Location=new System.Drawing.Point(377,36);
+			this.day.MaxLength=2;
+			this.day.Name="day";
+			this.day.Size=new System.Drawing.Size(37,21);
+			this.day.TabIndex=21;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions=new System.Drawing.SizeF(6F,13F);
 			this.AutoScaleMode=System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize=new System.Drawing.Size(708,423);
+			this.ClientSize=new System.Drawing.Size(706,423);
+			this.Controls.Add(this.day);
+			this.Controls.Add(this.month);
+			this.Controls.Add(this.year);
 			this.Controls.Add(this.cmdClear);
 			this.Controls.Add(this.cmdDelete);
 			this.Controls.Add(this.cmdUpdate);
@@ -281,7 +304,6 @@
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.cboCategory);
 			this.Controls.Add(this.label6);
-			this.Controls.Add(this.dtpReleaseDate);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.cboDeveloper);
 			this.Controls.Add(this.label4);
@@ -313,7 +335,6 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.ComboBox cboDeveloper;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.DateTimePicker dtpReleaseDate;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.ComboBox cboCategory;
 		private System.Windows.Forms.Label label7;
@@ -324,6 +345,9 @@
         private System.Windows.Forms.Button cmdDelete;
         private System.Windows.Forms.Button cmdClear;
 		private System.Windows.Forms.BindingSource bindingSource1;
+		private System.Windows.Forms.ComboBox year;
+		private System.Windows.Forms.ComboBox month;
+		private System.Windows.Forms.ComboBox day;
 	}
 }
 
