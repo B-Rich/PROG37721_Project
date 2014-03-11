@@ -113,27 +113,27 @@ namespace InventoryManagement
 			if(txtName.Text.Length>0) {
 				if(filter.Length>0)
 					filter+=" AND ";
-				filter+="name LIKE '%"+txtName.Text+"%'";
+				filter+="name LIKE '%"+formatString(txtName.Text)+"%'";
 			}
 			if(cboPlatform.Text.Length>0) {
 				if(filter.Length>0)
 					filter+=" AND ";
-				filter+="platform LIKE '%"+cboPlatform.Text+"%'";
+				filter+="platform LIKE '%"+formatString(cboPlatform.Text)+"%'";
 			}
 			if(cboPublisher.Text.Length>0) {
 				if(filter.Length>0)
 					filter+=" AND ";
-				filter+="publisher LIKE '%"+cboPublisher.Text+"%'";
+				filter+="publisher LIKE '%"+formatString(cboPublisher.Text)+"%'";
 			}
 			if(cboDeveloper.Text.Length>0) {
 				if(filter.Length>0)
 					filter+=" AND ";
-				filter+="developer LIKE '%"+cboDeveloper.Text+"%'";
+				filter+="developer LIKE '%"+formatString(cboDeveloper.Text)+"%'";
 			}
 			if(cboCategory.Text.Length>0) {
 				if(filter.Length>0)
 					filter+=" AND ";
-				filter+="category LIKE '%"+cboCategory.Text+"%'";
+				filter+="category LIKE '%"+formatString(cboCategory.Text)+"%'";
 			}
 			if(cboYear.Text.Length>0) {
 				int year=Convert.ToInt32(cboYear.Text);
@@ -167,21 +167,25 @@ namespace InventoryManagement
 			if(cboRating.Text.Length>0) {
 				if(filter.Length>0)
 					filter+=" AND ";
-				filter+="rating LIKE '%"+cboRating.Text+"%'";
+				filter+="rating LIKE '%"+formatString(cboRating.Text)+"%'";
 			}
 
-			StringBuilder sb = new StringBuilder();
-			for(int i=0;i<filter.Length;i++) {
-				if(filter[i]=='['||filter[i]==']'||filter[i]=='%'||filter[i]=='^') {
-					sb.Append("["+filter[i]+"]");
-				}
-				else {
-					sb.Append(filter[i]);
-				}
-			}
-			filter=sb.ToString();
+			
 
 			displayView.RowFilter=filter;			
+		}
+
+		private string formatString(string format) {
+			StringBuilder sb=new StringBuilder();
+			for(int i=0;i<format.Length;i++) {
+				if(format[i]=='['||format[i]==']'||format[i]=='%'||format[i]=='^') {
+					sb.Append("["+format[i]+"]");
+				}
+				else {
+					sb.Append(format[i]);
+				}
+			}
+			return sb.ToString();
 		}
 
         private void cmdInsert_Click(object sender,EventArgs e) {
