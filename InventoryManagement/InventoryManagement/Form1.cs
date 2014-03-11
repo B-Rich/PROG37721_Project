@@ -28,7 +28,7 @@ namespace InventoryManagement
 		private SqlDataAdapter dAdapter = null;
 		private DataSet mainDataSet = null;
 		private DataView displayView=null;
-
+		
 		public Form1()
 		{
 			InitializeComponent();
@@ -42,6 +42,15 @@ namespace InventoryManagement
 			cboCategory.TextChanged+=new EventHandler(updateViewFilter);
 			//dtpReleaseDate.TextChanged+=new EventHandler(updateViewFilter);
 			cboRating.TextChanged+=new EventHandler(updateViewFilter);
+			cboYear.TextChanged+=new EventHandler(updateViewFilter);
+			cboMonth.TextChanged+=new EventHandler(updateViewFilter);
+			cboDay.TextChanged+=new EventHandler(updateViewFilter);
+			cboYear.TextChanged+=new EventHandler(cboYear_TextChanged);
+			cboYear.TextChanged+=new EventHandler(cboMonth_TextChanged);
+			cboMonth.TextChanged+=new EventHandler(cboMonth_TextChanged);
+			cboYear.KeyPress+=new KeyPressEventHandler(numberValidation);
+			cboMonth.KeyPress+=new KeyPressEventHandler(numberValidation);
+			cboDay.KeyPress+=new KeyPressEventHandler(numberValidation);
 			
 			//CJ: Clear test values from controls
 			cboCategory.Items.Clear();
@@ -50,10 +59,55 @@ namespace InventoryManagement
 			cboPublisher.Items.Clear();
 			cboRating.Items.Clear();
 
+			cboMonth.Enabled=false;
+			cboDay.Enabled=false;
+
+			//Populate date combo boxes
+			for(int a=1970;a<=2020;a++)
+				cboYear.Items.Add(a);
+			for(int a=1;a<=12;a++)
+				cboMonth.Items.Add(a);
+
 			updateFromDB();
 			populateComboBoxes();
         }
-		
+
+		void numberValidation(object sender,KeyPressEventArgs e) {
+			if(e.KeyChar!=8)
+				if(e.KeyChar<'0'||e.KeyChar>'9')
+					e.Handled=true;
+		}
+
+		void cboMonth_TextChanged(object sender,EventArgs e) {
+			int days=0;
+			if(cboYear.Text.Length>0&&
+				cboMonth.Text.Length>0) {
+					int year=Convert.ToInt32(cboYear.Text);
+					int month=Convert.ToInt32(cboMonth.Text);
+					if(month>0&&month<13)
+						days=DateTime.DaysInMonth(year,month);
+				
+			}
+
+			cboDay.Items.Clear();
+
+			if(!cboMonth.Text.Equals(""))
+				cboDay.Enabled=true;
+			else
+				cboDay.Enabled=false;
+			
+			for(int a=1;a<=days;a++) {
+				cboDay.Items.Add(a);
+			}
+		}
+
+		void cboYear_TextChanged(object sender,EventArgs e) {
+			if(!cboYear.Text.Equals(""))
+				cboMonth.Enabled=true;
+			else
+				cboMonth.Enabled=false;
+		}
+
 		private void updateViewFilter(object sender,EventArgs e) {
 			string filter="";
 			if(txtName.Text.Length>0) {
@@ -81,11 +135,35 @@ namespace InventoryManagement
 					filter+=" AND ";
 				filter+="category LIKE '%"+cboCategory.Text+"%'";
 			}
-			/*if(dtpReleaseDate.Text.Length>0) { //Fix me
-				if(filter.Length>0)
-					filter+=" AND ";
-				filter+="releaseDate = '"+dtpReleaseDate.Text+"'";
-			}*/
+			if(cboYear.Text.Length>0) {
+				int year=Convert.ToInt32(cboYear.Text);
+
+				if(year>0&&year<3000) {
+					if(filter.Length>0)
+						filter+=" AND ";
+					int month=1;
+					int day=1;
+					int monthOffset=12;
+					if(cboMonth.Text.Length>0) {
+						month=Convert.ToInt32(cboMonth.Text);
+						monthOffset=1;
+						if(cboDay.Text.Length>0) {
+							day=Convert.ToInt32(cboDay.Text);
+							//monthOffset=0;
+						}
+					} 
+					if(month>0&&month<13&&day>0&&day<=DateTime.DaysInMonth(year,month)) {
+					DateTime date=new DateTime(year,month,day);
+						if(cboDay.Text.Length==0)
+							filter+="releaseDate >= #"+date+"# AND releaseDate < #"+date.AddMonths(monthOffset)+"#";
+						else
+							filter+="releaseDate = #"+date+"#";
+					}
+
+				}
+
+				
+			}
 			if(cboRating.Text.Length>0) {
 				if(filter.Length>0)
 					filter+=" AND ";
@@ -133,6 +211,11 @@ namespace InventoryManagement
             cboCategory.Text="";
             cboRating.Text="";
             //dtpReleaseDate.ResetText();
+			cboYear.Text="";
+			cboMonth.Text="";
+			cboMonth.Enabled=false;
+			cboDay.Text="";
+			cboDay.Enabled=false;
             txtName.Focus();
             dg1.ClearSelection();
         }

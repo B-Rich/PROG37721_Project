@@ -38,6 +38,9 @@
 			this.label4=new System.Windows.Forms.Label();
 			this.cboDeveloper=new System.Windows.Forms.ComboBox();
 			this.label5=new System.Windows.Forms.Label();
+			this.cboYear=new System.Windows.Forms.ComboBox();
+			this.cboMonth=new System.Windows.Forms.ComboBox();
+			this.cboDay=new System.Windows.Forms.ComboBox();
 			this.label6=new System.Windows.Forms.Label();
 			this.cboCategory=new System.Windows.Forms.ComboBox();
 			this.label7=new System.Windows.Forms.Label();
@@ -48,9 +51,6 @@
 			this.cmdDelete=new System.Windows.Forms.Button();
 			this.cmdClear=new System.Windows.Forms.Button();
 			this.bindingSource1=new System.Windows.Forms.BindingSource(this.components);
-			this.year=new System.Windows.Forms.ComboBox();
-			this.month=new System.Windows.Forms.ComboBox();
-			this.day=new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
 			this.SuspendLayout();
@@ -156,6 +156,33 @@
 			this.label5.TabIndex=8;
 			this.label5.Text="Release Date";
 			// 
+			// cboYear
+			// 
+			this.cboYear.FormattingEnabled=true;
+			this.cboYear.Location=new System.Drawing.Point(279,37);
+			this.cboYear.MaxLength=4;
+			this.cboYear.Name="cboYear";
+			this.cboYear.Size=new System.Drawing.Size(50,21);
+			this.cboYear.TabIndex=8;
+			// 
+			// cboMonth
+			// 
+			this.cboMonth.FormattingEnabled=true;
+			this.cboMonth.Location=new System.Drawing.Point(336,36);
+			this.cboMonth.MaxLength=2;
+			this.cboMonth.Name="cboMonth";
+			this.cboMonth.Size=new System.Drawing.Size(35,21);
+			this.cboMonth.TabIndex=9;
+			// 
+			// cboDay
+			// 
+			this.cboDay.FormattingEnabled=true;
+			this.cboDay.Location=new System.Drawing.Point(377,36);
+			this.cboDay.MaxLength=2;
+			this.cboDay.Name="cboDay";
+			this.cboDay.Size=new System.Drawing.Size(37,21);
+			this.cboDay.TabIndex=10;
+			// 
 			// label6
 			// 
 			this.label6.AutoSize=true;
@@ -260,41 +287,14 @@
 			this.cmdClear.UseVisualStyleBackColor=true;
 			this.cmdClear.Click+=new System.EventHandler(this.cmdClear_Click);
 			// 
-			// year
-			// 
-			this.year.FormattingEnabled=true;
-			this.year.Location=new System.Drawing.Point(280,37);
-			this.year.MaxLength=4;
-			this.year.Name="year";
-			this.year.Size=new System.Drawing.Size(50,21);
-			this.year.TabIndex=19;
-			// 
-			// month
-			// 
-			this.month.FormattingEnabled=true;
-			this.month.Location=new System.Drawing.Point(336,36);
-			this.month.MaxLength=2;
-			this.month.Name="month";
-			this.month.Size=new System.Drawing.Size(35,21);
-			this.month.TabIndex=20;
-			// 
-			// day
-			// 
-			this.day.FormattingEnabled=true;
-			this.day.Location=new System.Drawing.Point(377,36);
-			this.day.MaxLength=2;
-			this.day.Name="day";
-			this.day.Size=new System.Drawing.Size(37,21);
-			this.day.TabIndex=21;
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions=new System.Drawing.SizeF(6F,13F);
 			this.AutoScaleMode=System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize=new System.Drawing.Size(706,423);
-			this.Controls.Add(this.day);
-			this.Controls.Add(this.month);
-			this.Controls.Add(this.year);
+			this.Controls.Add(this.cboDay);
+			this.Controls.Add(this.cboMonth);
+			this.Controls.Add(this.cboYear);
 			this.Controls.Add(this.cmdClear);
 			this.Controls.Add(this.cmdDelete);
 			this.Controls.Add(this.cmdUpdate);
@@ -345,9 +345,9 @@
         private System.Windows.Forms.Button cmdDelete;
         private System.Windows.Forms.Button cmdClear;
 		private System.Windows.Forms.BindingSource bindingSource1;
-		private System.Windows.Forms.ComboBox year;
-		private System.Windows.Forms.ComboBox month;
-		private System.Windows.Forms.ComboBox day;
+		private System.Windows.Forms.ComboBox cboYear;
+		private System.Windows.Forms.ComboBox cboMonth;
+		private System.Windows.Forms.ComboBox cboDay;
 	}
 }
 
