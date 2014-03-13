@@ -190,8 +190,12 @@ namespace InventoryManagement
 
         private void cmdInsert_Click(object sender,EventArgs e) {
             Hide();
-            Form2 edit=new Form2();
-            edit.ShowDialog();
+            DataRow newRow = mainDataSet.Tables["inventory"].NewRow();
+            Form2 edit=new Form2(newRow);
+            if (edit.ShowDialog())
+            {
+                mainDataSet.Tables["inventory"].Rows.Add(newRow);
+            }
             Show();
         }
 
