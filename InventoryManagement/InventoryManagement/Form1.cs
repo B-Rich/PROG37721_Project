@@ -200,7 +200,29 @@ namespace InventoryManagement
         }
 
         private void cmdUpdate_Click(object sender,EventArgs e) {
-
+            if (dg1.SelectedRows.Count > 0)
+            {
+                Hide();
+                DataGridViewCellCollection selectedCells = dg1.CurrentRow.Cells;
+                DataRow[] rows = mainDataSet.Tables["inventory"].Select(
+                    "name='" + selectedCells["name"].Value.ToString() + "' AND " +
+                    "platform='" +selectedCells["platform"].Value.ToString() + "'"
+                );
+                if (rows.Length > 0)
+                {
+                    Form2 edit = new Form2(rows[0]);
+                    if (edit.ShowDialog())
+                    {
+                        updateToDB();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("ERROR: DataSet returned no rows that matched name=" + selectedCells["name"].Value.ToString() +
+                        " and platform=" + selectedCells["platform"].Value.ToString());
+                }
+                Show();
+            }
         }
 
         private void cmdDelete_Click(object sender,EventArgs e) {
@@ -234,7 +256,7 @@ namespace InventoryManagement
 			try
 			{
 				//use helper method to get a connection obj
-				SqlConnection conn = getConnection();
+				conn = getConnection();
 				conn.Open(); //open connection
 				String sql = "SELECT * FROM [inventory]";
 				dAdapter = new SqlDataAdapter(sql, conn);
@@ -273,6 +295,27 @@ namespace InventoryManagement
 				}
 			}
 		}
+
+        private void updateToDB()
+        {
+            try
+            {
+                conn.Open();
+                dAdapter.Update(mainDataSet, "inventory");
+                conn.Close();
+            }
+            catch (SqlException ex)
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+                MessageBox.Show(ex.Message,
+                    "Exception updated database",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
 
 		/**
 		 * Populate combo boxes with all distinct values from the database for the
