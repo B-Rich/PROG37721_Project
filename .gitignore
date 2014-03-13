@@ -154,5 +154,5 @@ $RECYCLE.BIN/
 # Our Files to Ignore
 # =========================
 
-InventoryManagement/InventoryManagement/*.mdf
-InventoryManagement/InventoryManagement/*.ldf
+**/*.mdf
+**/*.ldf
