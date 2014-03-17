@@ -195,6 +195,7 @@ namespace InventoryManagement
             if (edit.ShowDialog())
             {
                 mainDataSet.Tables["inventory"].Rows.Add(newRow);
+                updateToDB();
             }
             Show();
         }
