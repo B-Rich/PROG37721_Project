@@ -181,9 +181,14 @@ namespace InventoryManagement
 				if(format[i]=='['||format[i]==']'||format[i]=='%'||format[i]=='^') {
 					sb.Append("["+format[i]+"]");
 				}
-				else {
-					sb.Append(format[i]);
-				}
+                else if (format[i] == '\'')
+                {
+                    sb.Append("''");
+                }
+                else
+                {
+                    sb.Append(format[i]);
+                }
 			}
 			return sb.ToString();
 		}
