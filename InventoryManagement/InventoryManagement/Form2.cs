@@ -35,7 +35,10 @@ namespace InventoryManagement {
             cboCategory.Text = data["category"].ToString();
 
             //Console.WriteLine("release date: " + data["releaseDate"].GetType());
-            //dtpReleaseDate.Value = (DateTime)data["releaseDate"];
+            if (data["releaseDate"] != DBNull.Value)
+            {
+                dtpReleaseDate.Value = (DateTime)data["releaseDate"];
+            }
         }
 
         private void cmdCancel_Click(object sender,EventArgs e) {
