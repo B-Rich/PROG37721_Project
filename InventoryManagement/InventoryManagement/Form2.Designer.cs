@@ -59,7 +59,7 @@
             this.cboRating.MaxLength = 2;
             this.cboRating.Name = "cboRating";
             this.cboRating.Size = new System.Drawing.Size(80, 33);
-            this.cboRating.TabIndex = 27;
+            this.cboRating.TabIndex = 29;
             // 
             // label7
             // 
@@ -84,8 +84,8 @@
             this.cboCategory.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.cboCategory.MaxLength = 16;
             this.cboCategory.Name = "cboCategory";
-            this.cboCategory.Size = new System.Drawing.Size(239, 33);
-            this.cboCategory.TabIndex = 25;
+            this.cboCategory.Size = new System.Drawing.Size(272, 33);
+            this.cboCategory.TabIndex = 21;
             // 
             // label6
             // 
@@ -106,7 +106,7 @@
             this.dtpReleaseDate.MinDate = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
             this.dtpReleaseDate.Name = "dtpReleaseDate";
             this.dtpReleaseDate.Size = new System.Drawing.Size(272, 31);
-            this.dtpReleaseDate.TabIndex = 23;
+            this.dtpReleaseDate.TabIndex = 19;
             // 
             // label5
             // 
@@ -131,8 +131,8 @@
             this.cboDeveloper.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.cboDeveloper.MaxLength = 32;
             this.cboDeveloper.Name = "cboDeveloper";
-            this.cboDeveloper.Size = new System.Drawing.Size(239, 33);
-            this.cboDeveloper.TabIndex = 21;
+            this.cboDeveloper.Size = new System.Drawing.Size(292, 33);
+            this.cboDeveloper.TabIndex = 27;
             // 
             // label4
             // 
@@ -157,8 +157,8 @@
             this.cboPublisher.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.cboPublisher.MaxLength = 32;
             this.cboPublisher.Name = "cboPublisher";
-            this.cboPublisher.Size = new System.Drawing.Size(279, 33);
-            this.cboPublisher.TabIndex = 19;
+            this.cboPublisher.Size = new System.Drawing.Size(272, 33);
+            this.cboPublisher.TabIndex = 17;
             // 
             // label3
             // 
@@ -184,7 +184,7 @@
             this.cboPlatform.MaxLength = 16;
             this.cboPlatform.Name = "cboPlatform";
             this.cboPlatform.Size = new System.Drawing.Size(292, 33);
-            this.cboPlatform.TabIndex = 17;
+            this.cboPlatform.TabIndex = 25;
             // 
             // label2
             // 
@@ -232,7 +232,7 @@
             this.txtCost.MaxLength = 8;
             this.txtCost.Name = "txtCost";
             this.txtCost.Size = new System.Drawing.Size(160, 31);
-            this.txtCost.TabIndex = 29;
+            this.txtCost.TabIndex = 23;
             // 
             // label9
             // 
