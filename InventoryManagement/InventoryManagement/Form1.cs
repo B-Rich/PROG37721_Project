@@ -232,6 +232,7 @@ namespace InventoryManagement
                 }
                 Show();
             }
+            dg1.ClearSelection();
         }
 
         private void cmdDelete_Click(object sender,EventArgs e) {
@@ -254,6 +255,7 @@ namespace InventoryManagement
                 
                 mainDataSet.Tables["inventory"].Rows[rowIndex].Delete();
                 updateToDB();
+                dg1.ClearSelection();
             }
         }
 
