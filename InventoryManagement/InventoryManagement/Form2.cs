@@ -60,7 +60,7 @@ namespace InventoryManagement {
             data["rating"] = cboRating.Text;
             data["category"] = cboCategory.Text;
 
-            data["releaseDate"] = dtpReleaseDate.Value;
+            data["releaseDate"] = dtpReleaseDate.Value.Date;
 
             needsUpdate = true;
             Dispose();
