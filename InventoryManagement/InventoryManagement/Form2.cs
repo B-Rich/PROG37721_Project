@@ -48,22 +48,24 @@ namespace InventoryManagement {
         }
 
         private void cmdSave_Click(object sender,EventArgs e) {
-            //Insert or update record
+            //Insert or update record and check for empty field
+            if (isEmptyField() != true)
+            {
+                data["name"] = txtName.Text;
+                data["availability"] = Convert.ToInt32(txtAvailability.Text);
+                data["cost"] = Convert.ToDouble(txtCost.Text);
 
-            data["name"] = txtName.Text;
-            data["availability"] = Convert.ToInt32(txtAvailability.Text);
-            data["cost"] = Convert.ToDouble(txtCost.Text);
+                data["platform"] = cboPlatform.Text;
+                data["publisher"] = cboPublisher.Text;
+                data["developer"] = cboDeveloper.Text;
+                data["rating"] = cboRating.Text;
+                data["category"] = cboCategory.Text;
 
-            data["platform"] = cboPlatform.Text;
-            data["publisher"] = cboPublisher.Text;
-            data["developer"] = cboDeveloper.Text;
-            data["rating"] = cboRating.Text;
-            data["category"] = cboCategory.Text;
+                data["releaseDate"] = dtpReleaseDate.Value.Date;
 
-            data["releaseDate"] = dtpReleaseDate.Value.Date;
-
-            needsUpdate = true;
-            Dispose();
+                needsUpdate = true;
+                Dispose();
+            }
         }
 
         public bool ShowDialog()
@@ -81,6 +83,51 @@ namespace InventoryManagement {
             {
                 cboRating.Items.Add(ratings[i]);
             }
+        }
+
+        private bool isEmptyField()
+        {
+            if (txtName.Text.Equals(""))
+            {
+                MessageBox.Show("Name Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtName.Focus();
+            }
+            else if (cboPlatform.Text.Equals(""))
+            {
+                MessageBox.Show("Platform Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboPlatform.Focus();
+            }
+            else if (cboPublisher.Text.Equals(""))
+            {
+                MessageBox.Show("Publisher Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboPublisher.Focus();
+            }
+            else if (cboDeveloper.Text.Equals(""))
+            {
+                MessageBox.Show("Developer Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboDeveloper.Focus();
+            }
+            else if (cboRating.Text.Equals(""))
+            {
+                MessageBox.Show("Rating Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboRating.Focus();
+            }
+            else if (cboCategory.Text.Equals(""))
+            {
+                MessageBox.Show("Category Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboCategory.Focus();
+            }
+            else if (txtAvailability.Text.Equals(""))
+            {
+                MessageBox.Show("Availability Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAvailability.Focus();
+            }
+            else if (txtCost.Text.Equals(""))
+            {
+                MessageBox.Show("Cost Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCost.Focus();
+            }
+            return true;
         }
     }
 }
