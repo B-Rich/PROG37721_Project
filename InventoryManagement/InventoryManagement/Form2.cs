@@ -30,8 +30,7 @@ namespace InventoryManagement {
 
             cboPlatform.Text = data["platform"].ToString();
             cboPublisher.Text = data["publisher"].ToString();
-            cboDeveloper.Text = data["developer"].ToString();
-            cboRating.Text = data["rating"].ToString();
+            cboDeveloper.Text = data["developer"].ToString(); 
             cboCategory.Text = data["category"].ToString();
 
             if (data["releaseDate"] != DBNull.Value)
@@ -41,6 +40,7 @@ namespace InventoryManagement {
 
             //List Rating Combobox
             listRatings();
+            cboRating.Text = data["rating"].ToString();
         }
 
         private void cmdCancel_Click(object sender,EventArgs e) {
