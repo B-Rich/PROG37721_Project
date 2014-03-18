@@ -34,11 +34,13 @@ namespace InventoryManagement {
             cboRating.Text = data["rating"].ToString();
             cboCategory.Text = data["category"].ToString();
 
-            //Console.WriteLine("release date: " + data["releaseDate"].GetType());
             if (data["releaseDate"] != DBNull.Value)
             {
                 dtpReleaseDate.Value = (DateTime)data["releaseDate"];
             }
+
+            //List Rating Combobox
+            listRatings();
         }
 
         private void cmdCancel_Click(object sender,EventArgs e) {
@@ -68,6 +70,17 @@ namespace InventoryManagement {
         {
             base.ShowDialog();
             return needsUpdate;
+        }
+
+        private void listRatings()
+        {
+            cboRating.Items.Clear();
+            cboRating.DropDownStyle = ComboBoxStyle.DropDownList;
+            string [] ratings = {"E", "EC", "E10+", "T", "M", "AO", "RP"};
+            for (int i = 0; i < ratings.Count(); i++)
+            {
+                cboRating.Items.Add(ratings[i]);
+            }
         }
     }
 }
