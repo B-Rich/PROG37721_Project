@@ -235,7 +235,26 @@ namespace InventoryManagement
         }
 
         private void cmdDelete_Click(object sender,EventArgs e) {
-
+            int rowIndex = -1;
+            if (MessageBox.Show("Are you sure you want to delete this record?",
+            "Confirm record delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning,
+            MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+            {
+                rowIndex = dg1.CurrentRow.Index;
+                for (int i = 0; i < mainDataSet.Tables["inventory"].Rows.Count; i++)
+                {
+                    if (mainDataSet.Tables["inventory"].Rows[i].RowState != DataRowState.Deleted)
+                    {
+                        if (dg1.CurrentRow.Cells[0].Value.ToString().Equals(mainDataSet.Tables["inventory"].Rows[i][0].ToString()))
+                        {
+                            rowIndex = i;
+                        }
+                    }
+                }
+                
+                mainDataSet.Tables["inventory"].Rows[rowIndex].Delete();
+                updateToDB();
+            }
         }
 
         private void cmdClear_Click(object sender,EventArgs e) {
