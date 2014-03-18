@@ -312,7 +312,24 @@ namespace InventoryManagement
 				//dg1.Columns[COL_CATEGORY].Visible = false;
 				//dg1.Columns[COL_RELEASEDATE].Visible = false;
 				dg1.Columns[COL_RATING].Visible = false;
-				
+
+				//Make the column headers nice
+				dg1.Columns[COL_NAME].HeaderText = "Name";
+				dg1.Columns[COL_PLATFORM].HeaderText = "Platform";
+				dg1.Columns[COL_CATEGORY].HeaderText = "Category";
+				dg1.Columns[COL_RELEASEDATE].HeaderText = "Release Date";
+				dg1.Columns[COL_COST].HeaderText = "Cost";
+				dg1.Columns[COL_AVAILABILITY].HeaderText = "In Stock";
+
+				//Add extra width weight for the name column.
+				dg1.Columns[COL_NAME].FillWeight = 200f;
+				/*dg1.Columns[COL_CATEGORY].FillWeight = 100f;
+				dg1.Columns[COL_RELEASEDATE].FillWeight = 100f;*/
+				dg1.Columns[COL_COST].FillWeight = 60f;
+				dg1.Columns[COL_AVAILABILITY].FillWeight = 60f;
+
+				dg1.Columns[COL_COST].DefaultCellStyle.Format = "c";
+
 				dg1.ClearSelection();
 			}
 			catch (SqlException ex)
