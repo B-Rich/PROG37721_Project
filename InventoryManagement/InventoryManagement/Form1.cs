@@ -70,6 +70,9 @@ namespace InventoryManagement
 
 			updateFromDB();
 			populateComboBoxes();
+
+            //set control state
+            setControlState("search");
         }
 
 		void numberValidation(object sender,KeyPressEventArgs e) {
@@ -237,6 +240,7 @@ namespace InventoryManagement
 
         private void cmdClear_Click(object sender,EventArgs e) {
             clearText();
+            setControlState("search");
         }
 
         private void clearText() {
@@ -360,6 +364,23 @@ namespace InventoryManagement
 			return new SqlConnection(connStr);
 		}
 
+        private void setControlState(string state)
+        {
+            if (state.Equals("search"))
+            {
+                cmdUpdate.Enabled = false;
+                cmdDelete.Enabled = false;
+            }
+            else if (state.Equals("selected"))
+            {
+                cmdUpdate.Enabled = true;
+                cmdDelete.Enabled = true;
+            }
+        }
 
+        private void dg1_Click(object sender, EventArgs e)
+        {
+            setControlState("selected");
+        }
 	}
 }
