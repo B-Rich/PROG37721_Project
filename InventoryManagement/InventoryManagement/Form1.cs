@@ -380,8 +380,10 @@ namespace InventoryManagement
 		{
 			//We need to do some string acrobatics here because the connection string expects an absolute path to the mdf file
 			//TODO: Will need to change this when we do a release executable that isn't in /bin/Release or /bin/Debug
-			String path = Regex.Replace(System.Environment.CurrentDirectory, "bin.*", "Database1.mdf");
-			String connStr = "Data Source=.\\SQLEXPRESS;AttachDbFilename=" + path + ";Integrated Security=True;User Instance=True";
+			//String path = Regex.Replace(System.Environment.CurrentDirectory, "bin.*", "Database1.mdf");
+			//String connStr = "Data Source=.\\SQLEXPRESS;AttachDbFilename=" + path + ";Integrated Security=True;User Instance=True";
+			//CJ: Use |DataDirectory| to get the mdf's folder regardless of physical location
+			String connStr = "Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\Database1.mdf;Integrated Security=True;User Instance=True";
 			return new SqlConnection(connStr);
 		}
 
