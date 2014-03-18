@@ -91,43 +91,51 @@ namespace InventoryManagement {
             {
                 MessageBox.Show("Name Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtName.Focus();
+				return true;
             }
             else if (cboPlatform.Text.Equals(""))
             {
                 MessageBox.Show("Platform Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cboPlatform.Focus();
+				return true;
             }
             else if (cboPublisher.Text.Equals(""))
             {
                 MessageBox.Show("Publisher Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cboPublisher.Focus();
+				return true;
             }
             else if (cboDeveloper.Text.Equals(""))
             {
                 MessageBox.Show("Developer Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cboDeveloper.Focus();
+				return true;
             }
             else if (cboRating.Text.Equals(""))
             {
                 MessageBox.Show("Rating Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cboRating.Focus();
+				return true;
             }
             else if (cboCategory.Text.Equals(""))
             {
                 MessageBox.Show("Category Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cboCategory.Focus();
+				return true;
             }
             else if (txtAvailability.Text.Equals(""))
             {
                 MessageBox.Show("Availability Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtAvailability.Focus();
+				return true;
             }
             else if (txtCost.Text.Equals(""))
             {
                 MessageBox.Show("Cost Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCost.Focus();
+				return true;
             }
-            return true;
+            return false;
         }
     }
 }
