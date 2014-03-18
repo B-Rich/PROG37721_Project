@@ -206,6 +206,7 @@ namespace InventoryManagement
                 updateToDB();
             }
             Show();
+            dg1.ClearSelection();
         }
 
         private void cmdUpdate_Click(object sender,EventArgs e) {
