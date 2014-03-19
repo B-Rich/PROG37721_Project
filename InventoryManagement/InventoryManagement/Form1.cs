@@ -319,7 +319,7 @@ namespace InventoryManagement
 				dg1.Columns[COL_CATEGORY].HeaderText = "Category";
 				dg1.Columns[COL_RELEASEDATE].HeaderText = "Release Date";
 				dg1.Columns[COL_COST].HeaderText = "Cost";
-				dg1.Columns[COL_AVAILABILITY].HeaderText = "In Stock";
+				dg1.Columns[COL_AVAILABILITY].HeaderText = "Stock";
 
 				//Add extra width weight for the name column.
 				dg1.Columns[COL_NAME].FillWeight = 200f;
