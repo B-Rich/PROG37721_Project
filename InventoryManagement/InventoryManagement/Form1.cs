@@ -83,26 +83,31 @@ namespace InventoryManagement {
 		}
 
 		void cboMonth_TextChanged(object sender,EventArgs e) {
-			int days=0;
-			if(cboYear.Text.Length>0&&
-				cboMonth.Text.Length>0) {
-				int year=Convert.ToInt32(cboYear.Text);
-				int month=Convert.ToInt32(cboMonth.Text);
-				if(month>0&&month<13)
-					days=DateTime.DaysInMonth(year,month);
+			if(cboMonth.Enabled==true) {
+				int days=0;
+				if(cboYear.Text.Length>0&&
+					cboMonth.Text.Length>0) {
+					int year=Convert.ToInt32(cboYear.Text);
+					int month=Convert.ToInt32(cboMonth.Text);
+					if(month>0&&month<13)
+						days=DateTime.DaysInMonth(year,month);
 
+				}
+
+				cboDay.Items.Clear();
+
+				if(cboMonth.Text.Length>0)
+					cboDay.Enabled=true;
+				else
+					cboDay.Enabled=false;
+
+
+				for(int a=1;a<=days;a++) {
+					cboDay.Items.Add(a);
+				}
 			}
-
-			cboDay.Items.Clear();
-
-			if(cboMonth.Text.Length>0)
-				cboDay.Enabled=true;
 			else
 				cboDay.Enabled=false;
-
-			for(int a=1;a<=days;a++) {
-				cboDay.Items.Add(a);
-			}
 		}
 
 		void cboYear_TextChanged(object sender,EventArgs e) {
