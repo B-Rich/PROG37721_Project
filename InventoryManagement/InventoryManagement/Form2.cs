@@ -24,6 +24,7 @@ namespace InventoryManagement {
 
         private void Form2_Load(object sender, EventArgs e)
         {
+			populateComboBoxes();
             txtName.Text = data["name"].ToString();
             txtAvailability.Text = data["availability"].ToString();
             txtCost.Text = data["cost"].ToString();
@@ -42,6 +43,20 @@ namespace InventoryManagement {
             listRatings();
             cboRating.Text = data["rating"].ToString();
         }
+
+		/**
+		 * Populate combo boxes with all distinct values from the database for the
+		 * appropriate combo boxes.
+		 * Uses Form1's static method and dataset contained in Form1 static class.
+		 */
+		private void populateComboBoxes()
+		{
+			Form1.populateComboBox(cboCategory, Form1.COL_CATEGORY);
+			Form1.populateComboBox(cboDeveloper, Form1.COL_DEVELOPER);
+			Form1.populateComboBox(cboPlatform, Form1.COL_PLATFORM);
+			Form1.populateComboBox(cboPublisher, Form1.COL_PUBLISHER);
+			Form1.populateComboBox(cboRating, Form1.COL_RATING);
+		}
 
         private void cmdCancel_Click(object sender,EventArgs e) {
             Dispose();
