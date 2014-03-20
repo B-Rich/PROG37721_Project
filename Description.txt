@@ -1,0 +1,6 @@
+Group: Spiral Iris Software
+Members: Ricardo Chavez, Corey Jones, Michael Tughan, Jordan Wetherall, Kai (Kody) Wu
+
+InventoryManagement is a database for a gaming store, keeping track of available games,
+what platforms they're available for, and pricing for the games. The database has been
+seeded with a few games to start off with.
