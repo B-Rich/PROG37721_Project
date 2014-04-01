@@ -122,10 +122,7 @@ namespace InventoryManagement {
             cboRating.Items.Clear();
             cboRating.DropDownStyle = ComboBoxStyle.DropDownList;
             string [] ratings = {"E", "EC", "E10+", "T", "M", "AO", "RP"};
-            for (int i = 0; i < ratings.Count(); i++)
-            {
-                cboRating.Items.Add(ratings[i]);
-            }
+			cboRating.Items.AddRange(ratings); //CJ: Add all items at once.
         }
 
         private bool isEmptyField()
