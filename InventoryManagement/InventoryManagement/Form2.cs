@@ -6,11 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace InventoryManagement {
     public partial class Form2:Form {
         bool needsUpdate = false;
         DataRow data;
+
+        Regex availabilityRegex = new Regex(@"^\d*$"),
+              costRegex = new Regex(@"^\$?\d*\.?\d{0,2}$");
 
         public Form2() {
             InitializeComponent();
@@ -42,6 +46,25 @@ namespace InventoryManagement {
             //List Rating Combobox
             listRatings();
             cboRating.Text = data["rating"].ToString();
+            
+            txtAvailability.TextChanged += new EventHandler(checkRegexFields);
+            txtCost.TextChanged += new EventHandler(checkRegexFields);
+        }
+
+        void checkRegexFields(object sender, EventArgs e)
+        {
+            cmdSave.Enabled = true;
+
+            if (!availabilityRegex.IsMatch(txtAvailability.Text))
+            {
+                // show error label
+                cmdSave.Enabled = false;
+            }
+            if (!costRegex.IsMatch(txtCost.Text))
+            {
+                // show error label
+                cmdSave.Enabled = false;
+            }
         }
 
 		/**
@@ -68,7 +91,12 @@ namespace InventoryManagement {
             {
                 data["name"] = txtName.Text;
                 data["availability"] = Convert.ToInt32(txtAvailability.Text);
-                data["cost"] = Convert.ToDouble(txtCost.Text);
+                String cost = txtCost.Text;
+                if (cost[0] == '$')
+                {
+                    cost = cost.Substring(1);
+                }
+                data["cost"] = Convert.ToDouble(cost);
 
                 data["platform"] = cboPlatform.Text;
                 data["publisher"] = cboPublisher.Text;
@@ -144,7 +172,7 @@ namespace InventoryManagement {
                 txtAvailability.Focus();
 				return true;
             }
-            else if (txtCost.Text.Equals(""))
+            else if (txtCost.Text.Equals("") || txtCost.Text.Equals("$"))
             {
                 MessageBox.Show("Cost Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCost.Focus();
