@@ -111,7 +111,7 @@ namespace InventoryManagement {
             }
         }
 
-        public bool ShowDialog()
+        new public bool ShowDialog()
         {
             base.ShowDialog();
             return needsUpdate;
