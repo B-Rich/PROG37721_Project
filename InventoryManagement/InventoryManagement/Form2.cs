@@ -31,7 +31,7 @@ namespace InventoryManagement {
 			populateComboBoxes();
             txtName.Text = data["name"].ToString();
             txtAvailability.Text = data["availability"].ToString();
-            txtCost.Text = data["cost"].ToString();
+            txtCost.Text = Convert.ToDouble(data["cost"]).ToString("c");
 
             cboPlatform.Text = data["platform"].ToString();
             cboPublisher.Text = data["publisher"].ToString();
@@ -172,7 +172,7 @@ namespace InventoryManagement {
                 txtAvailability.Focus();
 				return true;
             }
-            else if (txtCost.Text.Equals("") || txtCost.Text.Equals("$"))
+            else if (new Regex(@"^\$?\.?$").IsMatch(txtCost.Text))
             {
                 MessageBox.Show("Cost Field Empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCost.Focus();
