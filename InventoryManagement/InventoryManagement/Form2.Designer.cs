@@ -281,8 +281,10 @@
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.txtName);
 			this.Controls.Add(this.label1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
 			this.Name = "Form2";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Edit Record";
 			this.Load += new System.EventHandler(this.Form2_Load);
 			this.ResumeLayout(false);

@@ -78,7 +78,11 @@ namespace InventoryManagement {
 			Form1.populateComboBox(cboDeveloper, Form1.COL_DEVELOPER);
 			Form1.populateComboBox(cboPlatform, Form1.COL_PLATFORM);
 			Form1.populateComboBox(cboPublisher, Form1.COL_PUBLISHER);
-			Form1.populateComboBox(cboRating, Form1.COL_RATING);
+			//Form1.populateComboBox(cboRating, Form1.COL_RATING);
+			//CJ: Not sure why but Add New Item would not populate with the right values (the original line here was wrong anyway)
+			cboRating.DropDownStyle = ComboBoxStyle.DropDownList; //CJ: Adding this; was it supposed to allow you to type in here?  this is a domain that is unlikely to change.
+			string[] ratings = { "E", "EC", "E10+", "T", "M", "AO", "RP" };
+			cboRating.Items.AddRange(ratings); //CJ: Add all items at once.
 		}
 
         private void cmdCancel_Click(object sender,EventArgs e) {
