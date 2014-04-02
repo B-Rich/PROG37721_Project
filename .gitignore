@@ -149,10 +149,3 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
-
-# =========================
-# Our Files to Ignore
-# =========================
-
-**/*.mdf
-**/*.ldf
