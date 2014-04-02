@@ -31,8 +31,10 @@ namespace InventoryManagement {
 			populateComboBoxes();
             txtName.Text = data["name"].ToString();
             txtAvailability.Text = data["availability"].ToString();
-            txtCost.Text = Convert.ToDouble(data["cost"]).ToString("c");
-
+            if (data["cost"] != DBNull.Value)
+            {
+                txtCost.Text = Convert.ToDouble(data["cost"]).ToString("c");
+            }
             cboPlatform.Text = data["platform"].ToString();
             cboPublisher.Text = data["publisher"].ToString();
             cboDeveloper.Text = data["developer"].ToString(); 
