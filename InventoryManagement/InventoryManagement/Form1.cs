@@ -24,6 +24,7 @@ namespace InventoryManagement
 		public static readonly int COL_RATING = 8;
 
 		private SqlConnection conn = null;
+        private String state = "";
 		//private SqlCommand cmd=null; //CJ: Not needed?
 		//CJ: Changed this to static
 		private static SqlDataAdapter dAdapter = null;
@@ -238,7 +239,8 @@ namespace InventoryManagement
 		{
 			Hide();
 			DataRow newRow = mainDataSet.Tables["inventory"].NewRow();
-			Form2 edit = new Form2(newRow);
+            state = "insert";
+			Form2 edit = new Form2(newRow, state);
 			if (edit.ShowDialog())
 			{
 				mainDataSet.Tables["inventory"].Rows.Add(newRow);
@@ -260,7 +262,8 @@ namespace InventoryManagement
 				);
 				if (rows.Length > 0)
 				{
-					Form2 edit = new Form2(rows[0]);
+                    state = "update";
+					Form2 edit = new Form2(rows[0], state);
 					if (edit.ShowDialog())
 					{
 						updateToDB();
