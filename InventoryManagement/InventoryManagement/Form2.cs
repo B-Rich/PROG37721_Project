@@ -15,7 +15,10 @@ namespace InventoryManagement
     {
         bool needsUpdate = false;
         DataRow data;
-        String insertOrUpdate;
+
+        //Variable for update and insert
+        String pkName = "";
+        String pkPlatform = "";
 
         Regex availabilityRegex = new Regex(@"^\d*$"),
               costRegex = new Regex(@"^\$?\d*\.?\d{0,2}$");
@@ -25,11 +28,10 @@ namespace InventoryManagement
             InitializeComponent();
         }
 
-        public Form2(DataRow row, string state)
+        public Form2(DataRow row)
         {
             InitializeComponent();
             data = row;
-            insertOrUpdate = state;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -57,6 +59,10 @@ namespace InventoryManagement
 
             txtAvailability.TextChanged += new EventHandler(checkRegexFields);
             txtCost.TextChanged += new EventHandler(checkRegexFields);
+
+            //Capture Primary Key in Update
+            pkName = txtName.Text;
+            pkPlatform = cboPlatform.Text;
         }
 
         void checkRegexFields(object sender, EventArgs e)
@@ -107,7 +113,7 @@ namespace InventoryManagement
             SqlDataAdapter dAdapter = new SqlDataAdapter(sql, conn);
             DataTable dt = new DataTable();
             dAdapter.Fill(dt);
-            if (isEmptyField() != true && isValidPrimaryKey(dt, txtName.Text, cboPlatform.Text) == true && insertOrUpdate.Equals("insert"))
+            if (isEmptyField() != true && (pkName.Equals(txtName.Text) && pkPlatform.Equals(cboPlatform.Text)))
             {
                 data["name"] = txtName.Text;
                 data["availability"] = Convert.ToInt32(txtAvailability.Text);
@@ -129,7 +135,7 @@ namespace InventoryManagement
                 needsUpdate = true;
                 Dispose();
             }
-            else if (isEmptyField() != true && insertOrUpdate.Equals("update"))
+            else if (isEmptyField() != true && isValidPrimaryKey(dt, txtName.Text, cboPlatform.Text) == true)
             {
                 data["name"] = txtName.Text;
                 data["availability"] = Convert.ToInt32(txtAvailability.Text);
@@ -226,7 +232,7 @@ namespace InventoryManagement
             pk[1] = platform;
             dt.PrimaryKey = new DataColumn[] { dt.Columns["name"], dt.Columns["platform"] };
             DataRow foundRow = dt.Rows.Find(pk);
-            if (foundRow != null && insertOrUpdate.Equals("insert"))
+            if (foundRow != null)
             {
                 MessageBox.Show("Game Name in Platform Exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtName.Focus();

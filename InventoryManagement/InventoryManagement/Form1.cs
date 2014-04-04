@@ -24,7 +24,6 @@ namespace InventoryManagement
 		public static readonly int COL_RATING = 8;
 
 		private SqlConnection conn = null;
-        private String state = "";
 		//private SqlCommand cmd=null; //CJ: Not needed?
 		//CJ: Changed this to static
 		private static SqlDataAdapter dAdapter = null;
@@ -239,8 +238,7 @@ namespace InventoryManagement
 		{
 			Hide();
 			DataRow newRow = mainDataSet.Tables["inventory"].NewRow();
-            state = "insert";
-			Form2 edit = new Form2(newRow, state);
+			Form2 edit = new Form2(newRow);
 			if (edit.ShowDialog())
 			{
 				mainDataSet.Tables["inventory"].Rows.Add(newRow);
@@ -248,6 +246,8 @@ namespace InventoryManagement
 			}
 			Show();
 			dg1.ClearSelection();
+            clearText();
+            setControlState("search");
 		}
 
 		private void cmdUpdate_Click(object sender, EventArgs e)
@@ -262,8 +262,7 @@ namespace InventoryManagement
 				);
 				if (rows.Length > 0)
 				{
-                    state = "update";
-					Form2 edit = new Form2(rows[0], state);
+					Form2 edit = new Form2(rows[0]);
 					if (edit.ShowDialog())
 					{
 						updateToDB();
@@ -277,6 +276,8 @@ namespace InventoryManagement
 				Show();
 			}
 			dg1.ClearSelection();
+            clearText();
+            setControlState("search");
 		}
 
 		private void cmdDelete_Click(object sender, EventArgs e)
@@ -326,6 +327,7 @@ namespace InventoryManagement
 			cboDay.Enabled = false;
 			txtName.Focus();
 			dg1.ClearSelection();
+
 		}
 
 
