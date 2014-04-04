@@ -103,7 +103,6 @@ namespace InventoryManagement
             //Insert or update record and check for empty field
             String connStr = "Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\Database1.mdf;Integrated Security=True;User Instance=True";
             SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
             String sql = "SELECT * FROM [inventory]";
             SqlDataAdapter dAdapter = new SqlDataAdapter(sql, conn);
             DataTable dt = new DataTable();
@@ -152,7 +151,6 @@ namespace InventoryManagement
                 needsUpdate = true;
                 Dispose();
             }
-            conn.Close();
         }
 
         new public bool ShowDialog()
