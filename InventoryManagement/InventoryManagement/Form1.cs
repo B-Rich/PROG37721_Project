@@ -260,15 +260,21 @@ namespace InventoryManagement
 					"name='" + selectedCells["name"].Value.ToString() + "' AND " +
 					"platform='" + selectedCells["platform"].Value.ToString() + "'"
 				);
-				if (rows.Length > 0)
+				bool foundMatch = false;
+				foreach (DataRow row in rows)
 				{
-					Form2 edit = new Form2(rows[0]);
-					if (edit.ShowDialog())
+					if (row.RowState != DataRowState.Deleted)
 					{
-						updateToDB();
+						foundMatch = true;
+						Form2 edit = new Form2(rows[0]);
+						if (edit.ShowDialog())
+						{
+							updateToDB();
+						}
+						break;
 					}
 				}
-				else
+				if(!foundMatch)
 				{
 					Console.WriteLine("ERROR: DataSet returned no rows that matched name=" + selectedCells["name"].Value.ToString() +
 						" and platform=" + selectedCells["platform"].Value.ToString());
@@ -282,24 +288,24 @@ namespace InventoryManagement
 
 		private void cmdDelete_Click(object sender, EventArgs e)
 		{
-			int rowIndex = -1;
 			if (MessageBox.Show("Are you sure you want to delete this record?",
 			"Confirm record delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning,
 			MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
 			{
-				rowIndex = dg1.CurrentRow.Index;
-				for (int i = 0; i < mainDataSet.Tables["inventory"].Rows.Count; i++)
+				DataGridViewCellCollection selectedCells = dg1.CurrentRow.Cells;
+				DataRow[] rows = mainDataSet.Tables["inventory"].Select(
+					"name='" + selectedCells["name"].Value.ToString() + "' AND " +
+					"platform='" + selectedCells["platform"].Value.ToString() + "'"
+				);
+				foreach (DataRow row in rows)
 				{
-					if (mainDataSet.Tables["inventory"].Rows[i].RowState != DataRowState.Deleted)
+					if (row.RowState != DataRowState.Deleted)
 					{
-						if (dg1.CurrentRow.Cells[0].Value.ToString().Equals(mainDataSet.Tables["inventory"].Rows[i][0].ToString()))
-						{
-							rowIndex = i;
-						}
+						row.Delete();
+						break;
 					}
 				}
 
-				mainDataSet.Tables["inventory"].Rows[rowIndex].Delete();
 				updateToDB();
 				dg1.ClearSelection();
 			}
