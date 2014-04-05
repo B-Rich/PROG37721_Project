@@ -470,7 +470,14 @@ namespace InventoryManagement
 
 		private void dg1_Click(object sender, EventArgs e)
 		{
-			setControlState("selected");
+			if (dg1.SelectedRows.Count > 0)
+			{
+				setControlState("selected");
+			}
+			else
+			{
+				setControlState("search");
+			}
 		}
 	}
 }
