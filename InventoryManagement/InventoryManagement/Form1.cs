@@ -308,6 +308,7 @@ namespace InventoryManagement
 
 				updateToDB();
 				dg1.ClearSelection();
+				setControlState("search");
 			}
 		}
 
