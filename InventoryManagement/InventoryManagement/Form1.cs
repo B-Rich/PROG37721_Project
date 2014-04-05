@@ -213,7 +213,7 @@ namespace InventoryManagement
 			displayView.RowFilter = filter;
 		}
 
-		private string formatString(string format)
+		private static string formatString(string format)
 		{
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < format.Length; i++)
@@ -494,8 +494,8 @@ namespace InventoryManagement
 		public static bool isValidPrimaryKey(String name, String platform)
 		{
 			DataRow[] rows = mainDataSet.Tables["inventory"].Select(
-				"name='" + name + "' AND " +
-				"inventory='" + platform + "'"
+				"name='" + formatString(name) + "' AND " +
+				"platform='" + formatString(platform) + "'"
 			);
 			foreach (DataRow row in rows)
 			{
