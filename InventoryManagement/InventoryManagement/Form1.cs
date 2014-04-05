@@ -246,8 +246,8 @@ namespace InventoryManagement
 			}
 			Show();
 			dg1.ClearSelection();
-            clearText();
-            setControlState("search");
+			clearText();
+			setControlState("search");
 		}
 
 		private void cmdUpdate_Click(object sender, EventArgs e)
@@ -282,8 +282,8 @@ namespace InventoryManagement
 				Show();
 			}
 			dg1.ClearSelection();
-            clearText();
-            setControlState("search");
+			clearText();
+			setControlState("search");
 		}
 
 		private void cmdDelete_Click(object sender, EventArgs e)
