@@ -257,8 +257,8 @@ namespace InventoryManagement
 				Hide();
 				DataGridViewCellCollection selectedCells = dg1.CurrentRow.Cells;
 				DataRow[] rows = mainDataSet.Tables["inventory"].Select(
-					"name='" + selectedCells["name"].Value.ToString() + "' AND " +
-					"platform='" + selectedCells["platform"].Value.ToString() + "'"
+					"name='" + formatString(selectedCells["name"].Value.ToString()) + "' AND " +
+					"platform='" + formatString(selectedCells["platform"].Value.ToString()) + "'"
 				);
 				bool foundMatch = false;
 				foreach (DataRow row in rows)
@@ -294,8 +294,8 @@ namespace InventoryManagement
 			{
 				DataGridViewCellCollection selectedCells = dg1.CurrentRow.Cells;
 				DataRow[] rows = mainDataSet.Tables["inventory"].Select(
-					"name='" + selectedCells["name"].Value.ToString() + "' AND " +
-					"platform='" + selectedCells["platform"].Value.ToString() + "'"
+					"name='" + formatString(selectedCells["name"].Value.ToString()) + "' AND " +
+					"platform='" + formatString(selectedCells["platform"].Value.ToString()) + "'"
 				);
 				foreach (DataRow row in rows)
 				{
