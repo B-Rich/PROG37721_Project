@@ -486,5 +486,25 @@ namespace InventoryManagement
 				setControlState("search");
 			}
 		}
+
+		/*
+		 * Allow Form2 to ask for a primary key check.
+		 * Return a boolean: true if the key is valid, false otherwise.
+		 */
+		public static bool isValidPrimaryKey(String name, String platform)
+		{
+			DataRow[] rows = mainDataSet.Tables["inventory"].Select(
+				"name='" + name + "' AND " +
+				"inventory='" + platform + "'"
+			);
+			foreach (DataRow row in rows)
+			{
+				if (row.RowState != DataRowState.Deleted)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 }

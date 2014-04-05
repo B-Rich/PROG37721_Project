@@ -106,37 +106,18 @@ namespace InventoryManagement
 
         private void cmdSave_Click(object sender, EventArgs e)
         {
-            //Insert or update record and check for empty field
-            String connStr = "Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\Database1.mdf;Integrated Security=True;User Instance=True";
-            SqlConnection conn = new SqlConnection(connStr);
-            String sql = "SELECT * FROM [inventory]";
-            SqlDataAdapter dAdapter = new SqlDataAdapter(sql, conn);
-            DataTable dt = new DataTable();
-            dAdapter.Fill(dt);
-            if (isEmptyField() != true && (pkName.Equals(txtName.Text) && pkPlatform.Equals(cboPlatform.Text)))
+			// first ensure all fields are filled out
+            if (isEmptyField() != true)
             {
-                data["name"] = txtName.Text;
-                data["availability"] = Convert.ToInt32(txtAvailability.Text);
-                String cost = txtCost.Text;
-                if (cost[0] == '$')
-                {
-                    cost = cost.Substring(1);
-                }
-                data["cost"] = Convert.ToDouble(cost);
-
-                data["platform"] = cboPlatform.Text;
-                data["publisher"] = cboPublisher.Text;
-                data["developer"] = cboDeveloper.Text;
-                data["rating"] = cboRating.Text;
-                data["category"] = cboCategory.Text;
-
-                data["releaseDate"] = dtpReleaseDate.Value.Date;
-
-                needsUpdate = true;
-                Dispose();
-            }
-            else if (isEmptyField() != true && isValidPrimaryKey(dt, txtName.Text, cboPlatform.Text) == true)
-            {
+				// if either primary key has changed, check for a valid primary key
+				if (!pkName.Equals(txtName.Text) || !pkPlatform.Equals(cboPlatform.Text)) {
+					if (!Form1.isValidPrimaryKey(txtName.Text, cboPlatform.Text))
+					{
+						MessageBox.Show("A game with that name and platform already exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						txtName.Focus();
+						return;
+					}
+				}
                 data["name"] = txtName.Text;
                 data["availability"] = Convert.ToInt32(txtAvailability.Text);
                 String cost = txtCost.Text;
@@ -224,21 +205,6 @@ namespace InventoryManagement
                 return true;
             }
             return false;
-        }
-        private bool isValidPrimaryKey(DataTable dt, string name, string platform)
-        {
-            object[] pk = new object[2];
-            pk[0] = name;
-            pk[1] = platform;
-            dt.PrimaryKey = new DataColumn[] { dt.Columns["name"], dt.Columns["platform"] };
-            DataRow foundRow = dt.Rows.Find(pk);
-            if (foundRow != null)
-            {
-                MessageBox.Show("Game Name in Platform Exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtName.Focus();
-                return false;
-            }
-            return true;
         }
     }
 }
