@@ -354,7 +354,7 @@ namespace InventoryManagement
 
 				//Initialize DataView
 				displayView = new DataView(mainDataSet.Tables["inventory"]);
-				displayView.Sort = "name DESC";
+				displayView.Sort = "name ASC";
 
 				//bind
 				bindingSource1.DataSource = displayView;
